@@ -1,26 +1,18 @@
 # Home Media Server
 
-A simple self-hosted home server built with **Ubuntu Server + Docker**,
-running:
+A simple self-hosted home server built with **Ubuntu Server + Docker**, running:
 
 -   **Jellyfin** - movies, TV and music
 -   **Immich** - photo and video backup
 -   **Nextcloud** - private cloud file storage
 -   **Homarr** - a dashboard for accessing the services
 
-This repository accompanies my home media server build. The hardware I
-used was a **GMKtec NucBox G5 with an Intel N97**, an internal SSD for
-Ubuntu/application data, and an external SSD for media, photos and
-files.
+This repository accompanies my home media server build. The hardware I used was a **GMKtec NucBox G5 with an Intel N97**, an internal SSD for Ubuntu/application data, and an external SSD for media, photos and files.
 
-You do not need to use the same hardware. The guide is intentionally written
-so that hardware-specific values are checked on your own server rather
-than copied from mine.
+You do not need to use the same hardware. The guide is intentionally written so that hardware-specific values are checked on your own server rather than copied from mine.
 
-> \[!IMPORTANT\] This guide assumes an x86-64 Ubuntu Server machine and
-> uses Intel Quick Sync for the optional Jellyfin hardware-transcoding
-> section. Jellyfin itself will run without Intel hardware acceleration,
-> but users of AMD/NVIDIA hardware will need to adapt that section.
+> [!IMPORTANT]
+> This guide assumes an x86-64 Ubuntu Server machine and uses Intel Quick Sync for the optional Jellyfin hardware-transcoding section. Jellyfin itself will run without Intel hardware acceleration, but users of AMD/NVIDIA hardware will need to adapt that section.
 
 ## Contents
 
@@ -122,9 +114,8 @@ I used a separate SSD mounted at:
 The commands below assume the drive is already partitioned and formatted
 as **ext4**.
 
-> \[!WARNING\] Do not blindly copy a device name such as `/dev/sda1`.
-> Identify your own storage device first. Formatting or modifying the
-> wrong disk can destroy data.
+> [!WARNING\]
+> Do not blindly copy a device name such as `/dev/sda1`. Identify your own storage device first. Formatting or modifying the wrong disk can destroy data.
 
 ## 2.1 Identify the drive
 
@@ -388,10 +379,8 @@ Then:
 vainfo
 ```
 
-> \[!NOTE\] `vainfo` can produce display-related warnings on a headless
-> Ubuntu Server. The important checks for this build are that
-> `/dev/dri/renderD128` exists and that the Jellyfin container can
-> access it.
+> [!NOTE\]
+> `vainfo` can produce display-related warnings on a headless Ubuntu Server. The important checks for this build are that `/dev/dri/renderD128` exists and that the Jellyfin container can access it.
 
 ## 4.2 Get the IDs required by the Compose file
 
@@ -454,9 +443,8 @@ VIDEO_GID=44
 
 Save and exit.
 
-> \[!TIP\] The supplied Compose file maps `/mnt/storage/media/movies`,
-> `/tv`, and `/music`. If your media lives somewhere else, edit the
-> volume paths in `compose.yml`.
+> [!TIP\]
+> The supplied Compose file maps `/mnt/storage/media/movies`, `/tv`, and `/music`. If your media lives somewhere else, edit the volume paths in `compose.yml`.
 
 ## 4.4 Validate and start Jellyfin
 
@@ -530,10 +518,8 @@ Use:
 
 Enable hardware decoding only for codecs supported by your hardware.
 
-> \[!IMPORTANT\] Transcoding capabilities vary by CPU generation and
-> GPU. The Intel N97 used in my build supports the configuration I
-> demonstrated, but do not assume every Intel CPU supports the same
-> codecs.
+> [!IMPORTANT\]
+> Transcoding capabilities vary by CPU generation and GPU. The Intel N97 used in my build supports the configuration I demonstrated, but do not assume every Intel CPU supports the same codecs.
 
 Check that the container can see the GPU:
 
@@ -551,9 +537,7 @@ docker exec jellyfin id
 
 # 5. Install Immich
 
-For Immich, this guide deliberately downloads the **current official
-Compose deployment** rather than keeping a potentially outdated Immich
-Compose file in this repository.
+For Immich, this guide deliberately downloads the **current official Compose deployment** rather than keeping a potentially outdated Immich Compose file in this repository.
 
 The layout is:
 
@@ -647,9 +631,7 @@ Set:
 DB_PASSWORD=YOUR_GENERATED_PASSWORD
 ```
 
-Leave Immich's supplied values for `IMMICH_VERSION`, `DB_USERNAME` and
-`DB_DATABASE_NAME` at their current defaults unless the current Immich
-documentation instructs otherwise.
+Leave Immich's supplied values for `IMMICH_VERSION`, `DB_USERNAME` and `DB_DATABASE_NAME` at their current defaults unless the current Immich documentation instructs otherwise.
 
 Save and exit.
 
@@ -974,11 +956,8 @@ Enter that key into Homarr's Jellyfin integration settings.
 
 Never publish the API key.
 
-> \[!NOTE\] This basic build intentionally does not mount
-> `/var/run/docker.sock` into Homarr. Direct Docker socket access gives
-> a container extensive control over the Docker host. If you later want
-> container-management integration, review Homarr's current security
-> guidance and consider a restricted socket proxy.
+> [!NOTE\]
+> This basic build intentionally does not mount `/var/run/docker.sock` into Homarr. Direct Docker socket access gives a container extensive control over the Docker host. If you later want container-management integration, review Homarr's current security guidance and consider a restricted socket proxy.
 
 ------------------------------------------------------------------------
 
@@ -1095,9 +1074,8 @@ docker compose pull
 docker compose up -d
 ```
 
-> \[!IMPORTANT\] Before major application upgrades, read the project's
-> release notes and make sure you have backups. Some applications can
-> require migration steps between versions.
+> [!IMPORTANT\]
+> Before major application upgrades, read the project's release notes and make sure you have backups. Some applications can require migration steps between versions.
 
 ------------------------------------------------------------------------
 
@@ -1118,20 +1096,14 @@ docker compose up -d
     └── .env.example
 ```
 
-Immich is intentionally downloaded from its latest official release
-during installation rather than storing a static copy here.
+Immich is intentionally downloaded from its latest official release during installation rather than storing a static copy here.
 
 ------------------------------------------------------------------------
 
 # Notes
 
-This repository documents the configuration used for my YouTube
-home-server project, adapted to make the installation portable across
-similar Ubuntu systems.
+This repository documents the configuration used for my YouTube home-server project, adapted to make the installation portable across similar Ubuntu systems.
 
-Paths, user/group IDs, storage devices, GPU capabilities, IP addresses
-and timezones may differ on your system. Check each of these rather than
-copying example values blindly.
+Paths, user/group IDs, storage devices, GPU capabilities, IP addresses and timezones may differ on your system. Check each of these rather than copying example values blindly.
 
-If you change the storage layout, make the corresponding changes to the
-Compose volume mappings before starting the containers.
+If you change the storage layout, make the corresponding changes to the Compose volume mappings before starting the containers.
