@@ -1,0 +1,18 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    user: "${PUID}:${PGID}"
+    group_add:
+      - "${RENDER_GID}"
+      - "${VIDEO_GID}"
+    network_mode: host
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - /mnt/storage/media/movies:/media/movies:ro
+      - /mnt/storage/media/tv:/media/tv:ro
+      - /mnt/storage/media/music:/media/music:ro
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+    restart: unless-stopped
