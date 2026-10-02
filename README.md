@@ -3,17 +3,17 @@
 A simple self-hosted home server built with **Ubuntu Server + Docker**,
 running:
 
--   **Jellyfin** --- movies, TV and music
--   **Immich** --- photo and video backup
--   **Nextcloud** --- private cloud file storage
--   **Homarr** --- a dashboard for accessing the services
+-   **Jellyfin** - movies, TV and music
+-   **Immich** - photo and video backup
+-   **Nextcloud** - private cloud file storage
+-   **Homarr** - a dashboard for accessing the services
 
 This repository accompanies my home media server build. The hardware I
 used was a **GMKtec NucBox G5 with an Intel N97**, an internal SSD for
 Ubuntu/application data, and an external SSD for media, photos and
 files.
 
-You do **not** need the same hardware. The guide is deliberately written
+You do not need to use the same hardware. The guide is intentionally written
 so that hardware-specific values are checked on your own server rather
 than copied from mine.
 
