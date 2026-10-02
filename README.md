@@ -68,20 +68,15 @@ configuration.
 
 ### Services and ports
 
-  Service     Purpose              Default URL
-  ----------- -------------------- -------------------------
-  Jellyfin    Media server         `http://SERVER-IP:8096`
-  Immich      Photo/video backup   `http://SERVER-IP:2283`
-  Nextcloud   File storage         `http://SERVER-IP:8080`
-  Homarr      Dashboard            `http://SERVER-IP:7575`
+| Service | Purpose | Default URL |
+| --- | --- | --- |
+| Jellyfin | Media server | `http://SERVER-IP:8096` |
+| Immich | Photo/video backup | `http://SERVER-IP:2283` |
+| Nextcloud | File storage | `http://SERVER-IP:8080` |
+| Homarr | Dashboard | `http://SERVER-IP:7575` |
 
-> \[!NOTE\] These services are initially exposed only over normal HTTP
-> on your local network. Do not simply port-forward them to the public
-> internet. If you need remote access, use an appropriately secured
-> solution such as a VPN/reverse-proxy setup and follow the current
-> documentation for each service.
-
-------------------------------------------------------------------------
+> [!NOTE]
+> These services are initially exposed only over normal HTTP on your local network. Do not simply port-forward them to the public internet. If you need remote access, use an appropriately secured solution such as a VPN/reverse-proxy setup and follow the current documentation for each service.
 
 # 1. Install Ubuntu Server
 
